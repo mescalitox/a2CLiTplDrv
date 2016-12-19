@@ -1,4 +1,4 @@
-<app-edit-item [item]="currentEditedItem" *ngIf="currentEditedItem"></app-edit-item>
+<app-edit-item [item]="currentEditedItem" *ngIf="currentEditedItem" (onClickCancel)="onCancel($event)"></app-edit-item>
 <app-detail-item *ngIf="currentItem && currentEditedItem == null" [item]="currentItem" (onClickEdit)="onEdit($event)" (onClickRemove)="onRemove($event)"></app-detail-item>
 <app-ui-panel>
   <span class="ui-title">{{title}}</span>

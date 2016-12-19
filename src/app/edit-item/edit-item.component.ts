@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-edit-item',
@@ -8,6 +8,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 export class EditItemComponent implements OnInit, OnChanges {
 
   @Input() item: any;
+  @Output() onClickCancel: EventEmitter<any> = new EventEmitter();
 
   private title = "test";
 
@@ -19,6 +20,10 @@ export class EditItemComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     console.warn("chg edit");
+  }
+
+  onCancel() {
+    this.onClickCancel.emit(this.item);
   }
 
 }

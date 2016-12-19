@@ -10,7 +10,7 @@ export class DetailItemComponent implements OnInit {
   @Input() item: any;
 
   @Output() onClickEdit: EventEmitter<any> = new EventEmitter();
-  @Output() onRemoveEdit: EventEmitter<any> = new EventEmitter();
+  @Output() onClickRemove: EventEmitter<any> = new EventEmitter();
 
 
   constructor() { }
@@ -24,7 +24,7 @@ export class DetailItemComponent implements OnInit {
   }
 
   onRemove() {
-    this.onRemoveEdit.emit(this.item);
+    this.onClickRemove.emit(this.item);
     console.warn("onRemove");
   }
 

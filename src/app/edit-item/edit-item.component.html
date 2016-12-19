@@ -16,6 +16,7 @@
         <div class="alert alert-danger" [hidden]="codename.pristine || codename.valid">Obligatoire</div>
       </div>
       <img src="http://robohash.org/{{item.codename}}" class="circle" width="150" height="150" />
+      <app-ui-button level="0" icon="retweet" (click)="onCancel()">Annuler</app-ui-button>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

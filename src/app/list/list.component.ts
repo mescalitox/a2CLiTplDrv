@@ -38,5 +38,10 @@ export class ListComponent implements OnInit {
     console.warn("onRemove");
   }
 
+  onCancel(item: any) {
+    this.currentEditedItem = null;
+    console.warn("onCancel");
+  }
+
 
 }
