@@ -1,8 +1,7 @@
 <app-ui-panel>
-  <span class="ui-title">{{title}}</span>
+  <span class="ui-title">Edition</span>
   <div class="ui-body">
     <form (ngSubmit)="onSubmit()" method="POST" #formEdit="ngForm">
-      <legend>Edition</legend>
       <div class="form-group">
         <label for="name">Name</label>
         <input [disabled]="" required="true" type="text" class="form-control" placeholder="Saisie du nom" [(ngModel)]="item.name"
