@@ -1,0 +1,22 @@
+<app-ui-panel>
+  <span class="ui-title">{{title}}</span>
+  <div class="ui-body">
+    <form (ngSubmit)="onSubmit()" method="POST" #formEdit="ngForm">
+      <legend>Edition</legend>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input [disabled]="" required="true" type="text" class="form-control" placeholder="Saisie du nom" [(ngModel)]="item.name"
+          id="name" name="name" #name="ngModel">
+        <div class="alert alert-danger" [hidden]="name.pristine || name.valid">Obligatoire</div>
+      </div>
+      <div class="form-group">
+        <label for="codename">Codename</label>
+        <input #codename="ngModel" required="true" type="text" class="form-control" placeholder="Saisie du nom de code" [(ngModel)]="item.codename"
+          id="codename" name="codename">
+        <div class="alert alert-danger" [hidden]="codename.pristine || codename.valid">Obligatoire</div>
+      </div>
+      <img src="http://robohash.org/{{item.codename}}" class="circle" width="150" height="150" />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</app-ui-panel>

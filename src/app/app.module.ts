@@ -9,6 +9,9 @@ import { ListComponent } from './list/list.component';
 import { ListItemComponent } from './list/list-item/list-item.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { UiPanelComponent } from './ui/ui-panel/ui-panel.component';
+import { UiButtonComponent } from './ui/ui-button/ui-button.component';
+import { EditItemComponent } from './edit-item/edit-item.component';
+import { DetailItemComponent } from './detail-item/detail-item.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { UiPanelComponent } from './ui/ui-panel/ui-panel.component';
     ListComponent,
     ListItemComponent,
     NavBarComponent,
-    UiPanelComponent
+    UiPanelComponent,
+    UiButtonComponent,
+    EditItemComponent,
+    DetailItemComponent
   ],
   imports: [
     BrowserModule,

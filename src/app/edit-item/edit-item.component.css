@@ -1,0 +1,11 @@
+input[required] {
+  border-left: 8px solid orange;
+}
+
+input.ng-invalid.ng-dirty {
+  border-left: 8px solid orangered;
+}
+
+input.ng-valid.ng-dirty {
+  border-left: 8px solid limegreen;
+}

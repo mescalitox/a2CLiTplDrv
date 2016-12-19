@@ -1,0 +1,17 @@
+<app-ui-panel>
+  <span class="ui-title">{{item.id}} - {{item.name}}</span>
+  <div class="ui-body">
+    <dl class="dl-horizontal">
+      <dt>Id</dt>
+      <dd>{{item.id}}</dd>
+      <dt>Name</dt>
+      <dd>{{item.name}}</dd>
+      <dt>CodeName</dt>
+      <dd>{{item.codename}}</dd>
+      <dt>Robot</dt>
+      <dd><img src="http://robohash.org/{{item.codename}}" width="150" height="150" /></dd>
+    </dl>
+    <app-ui-button level="1" icon="edit" (click)="onEdit()">Edition</app-ui-button>
+    <app-ui-button level="2" icon="remove" (click)="onRemove()">Suppression</app-ui-button>
+  </div>
+</app-ui-panel>

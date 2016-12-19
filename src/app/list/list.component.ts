@@ -14,6 +14,8 @@ export class ListComponent implements OnInit {
 
   private currentItem: any;
 
+  private currentEditedItem: any;
+
   constructor(private userManagerService: UserManagerService) { }
 
   ngOnInit() {
@@ -22,6 +24,19 @@ export class ListComponent implements OnInit {
 
   onSelect(item: any) {
     this.currentItem = item;
+    this.currentEditedItem = null;
+    console.warn("onSelect");
   }
+
+  onEdit(item: any) {
+    this.currentEditedItem = Object.assign({}, this.currentItem);
+    console.warn("onEdit");
+  }
+
+  onRemove(item: any) {
+
+    console.warn("onRemove");
+  }
+
 
 }
