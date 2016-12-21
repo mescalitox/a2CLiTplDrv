@@ -33,6 +33,12 @@ export class ListComponent implements OnInit {
     console.warn("onEdit");
   }
 
+  onSelectAndEdit(item: any) {
+    this.currentItem = item;
+    this.currentEditedItem = Object.assign({}, this.currentItem);
+    console.warn("onSelectAndEdit");
+  }
+
   onRemove(item: any) {
 
     console.warn("onRemove");

@@ -1,0 +1,26 @@
+<p>
+  edit-rf-item works!
+</p>
+<app-ui-panel>
+  <span class="ui-title">Edition</span>
+  <div class="ui-body">
+    <form (ngSubmit)="onSubmit()" [formGroup]="editRfForm" novalidate>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" placeholder="Saisie du nom" id="name" formControlName="name">
+        <div class="alert alert-danger" *ngIf="editRfForm.get('name').hasError('required') && editRfForm.get('name').touched">Obligatoire</div>
+      </div>
+      <div class="form-group">
+        <label for="codename">Codename</label>
+        <input type="text" class="form-control" placeholder="Saisie du nom code" id="codename" formControlName="codename">
+        <div class="alert alert-danger" *ngIf="editRfForm.get('codename').hasError('required') && editRfForm.get('codename').touched">Obligatoire</div>
+        <div class="alert alert-danger" *ngIf="editRfForm.get('codename').hasError('minlength') && editRfForm.get('codename').touched">Minimum 3 caractères</div>
+      </div>
+      <pre>{{editRfForm.errors | json}}</pre>
+      <div class="alert alert-danger" *ngIf="editRfForm.hasError('identiques')">Name et code name doivent être différents</div>
+      <!--<div class="alert alert-danger" [hidden]="editRfForm.validator.get('specialValidator').valid">Obligatoire</div>-->
+      <button [disabled]="editRfForm.pristine" class="btn btn-default" (click)="onCancel()">Annuler</button>
+      <button type="submit" [disabled]="!editRfForm.valid" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</app-ui-panel>

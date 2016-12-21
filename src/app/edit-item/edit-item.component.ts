@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-edit-item',
@@ -18,12 +18,17 @@ export class EditItemComponent implements OnInit, OnChanges {
     console.warn("init edit");
   }
 
-  ngOnChanges() {
-    console.warn("chg edit");
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("changes");
+    console.log(changes['item'].currentValue);
   }
 
   onCancel() {
     this.onClickCancel.emit(this.item);
+  }
+
+  onsubmit() {
+
   }
 
 }
