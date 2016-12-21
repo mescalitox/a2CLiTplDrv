@@ -17,6 +17,7 @@
         <div class="alert alert-danger" *ngIf="editRfForm.get('codename').hasError('minlength') && editRfForm.get('codename').touched">Minimum 3 caractères</div>
       </div>
       <pre>{{editRfForm.errors | json}}</pre>
+      <pre>{{editRfForm.value | json}}</pre>
       <div class="alert alert-danger" *ngIf="editRfForm.hasError('identiques')">Name et code name doivent être différents</div>
       <!--<div class="alert alert-danger" [hidden]="editRfForm.validator.get('specialValidator').valid">Obligatoire</div>-->
       <button [disabled]="editRfForm.pristine" class="btn btn-default" (click)="onCancel()">Annuler</button>

@@ -1,3 +1,4 @@
+import { UserManagerService } from './../shared/user-manager.service';
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
@@ -12,13 +13,13 @@ import 'rxjs/add/operator/filter';
 export class EditRfItemComponent implements OnInit, OnChanges {
 
   @Input() item: any;
-  @Output() onClickCancel: EventEmitter<any> = new EventEmitter();
+  @Output() validSubmit: EventEmitter<any> = new EventEmitter();
 
   private editRfForm: FormGroup;
 
   private nameFc = new FormControl("", Validators.required);
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userManagerService: UserManagerService) {
 
     this.editRfForm = new FormGroup({
       name: this.nameFc,
@@ -57,14 +58,22 @@ export class EditRfItemComponent implements OnInit, OnChanges {
 
   onCancel() {
     this.editRfForm.reset({ name: this.item.name, codename: this.item.codename });
-    //this.onClickCancel.emit(this.item);
   }
 
   onSubmit() {
+    // let majItem = this.editRfForm.value;
+    // majItem.id = this.item.id;
+    // console.log(majItem);
     console.log(this.editRfForm.value);   // {name: 'valeur...', codename: 'valeur...'}
     console.log(this.editRfForm.status);  // 'VALID'
     console.log("model-based form submitted");
-    console.log(this.editRfForm);
+    this.userManagerService.save(this.item.id, this.editRfForm.value).then(majItem => {
+      //action sur la résolution de la promise
+      console.warn("submit effectué");
+      console.warn(majItem);
+      //emission de l'item mis a jour
+      this.validSubmit.emit(majItem)
+    });
   }
 
 }

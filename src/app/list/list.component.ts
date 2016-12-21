@@ -33,12 +33,6 @@ export class ListComponent implements OnInit {
     console.warn("onEdit");
   }
 
-  onSelectAndEdit(item: any) {
-    this.currentItem = item;
-    this.currentEditedItem = Object.assign({}, this.currentItem);
-    console.warn("onSelectAndEdit");
-  }
-
   onRemove(item: any) {
 
     console.warn("onRemove");
@@ -47,6 +41,13 @@ export class ListComponent implements OnInit {
   onCancel(item: any) {
     this.currentEditedItem = null;
     console.warn("onCancel");
+  }
+
+  onValidSubmitEdit(majItem: any) {
+    //remplacement dans la liste
+    this.listItems.splice(this.listItems.findIndex(u => u.id === majItem.id), 1, majItem);
+    //mis à null car currentItem pointe vers un ancien objet inexistant
+    this.currentItem = null
   }
 
 
