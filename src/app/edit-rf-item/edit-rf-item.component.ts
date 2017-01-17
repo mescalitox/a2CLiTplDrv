@@ -1,8 +1,17 @@
 import { UserManagerService } from './../shared/user-manager.service';
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
 
 import 'rxjs/add/operator/filter';
+
+/** A hero's name can't match the given regular expression */
+export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } => {
+    const name = control.value;
+    const no = nameRe.test(name);
+    return no ? { 'forbiddenName': { name } } : null;
+  };
+}
 
 //reactive form ou model driven form
 @Component({
@@ -23,7 +32,7 @@ export class EditRfItemComponent implements OnInit, OnChanges {
 
     this.editRfForm = new FormGroup({
       name: this.nameFc,
-      codename: new FormControl('', [Validators.required, Validators.minLength(3)])
+      codename: new FormControl('', [Validators.required, Validators.minLength(3), forbiddenNameValidator(/JA/i)])
     }, this.specialValidator);
 
   }

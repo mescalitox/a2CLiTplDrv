@@ -13,9 +13,13 @@
       <div class="form-group">
         <label for="codename">Codename</label>
         <input type="text" class="form-control" placeholder="Saisie du nom code" id="codename" formControlName="codename">
-        <div class="alert alert-danger" *ngIf="editRfForm.get('codename').hasError('required') && editRfForm.get('codename').touched">Obligatoire</div>
-        <div class="alert alert-danger" *ngIf="editRfForm.get('codename').hasError('minlength') && editRfForm.get('codename').touched">Minimum 3 caractères</div>
+        <div class="alert alert-danger" *ngIf="editRfForm.get('codename').errors && editRfForm.get('codename').touched">
+          <span *ngIf="editRfForm.get('codename').hasError('required')">Obligatoire. </span>
+          <span *ngIf="editRfForm.get('codename').hasError('minlength')">Minimum 3 caractères. </span>
+          <span *ngIf="editRfForm.get('codename').hasError('forbiddenName')">Nom interdit. </span>
+        </div>
       </div>
+      <pre>{{editRfForm.get('codename').errors | json}}</pre>
       <pre>{{editRfForm.errors | json}}</pre>
       <pre>{{editRfForm.value | json}}</pre>
       <div class="alert alert-danger" *ngIf="editRfForm.hasError('identiques')">Name et code name doivent être différents</div>
