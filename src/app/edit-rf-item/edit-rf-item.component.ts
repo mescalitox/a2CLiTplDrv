@@ -4,14 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, Valid
 
 import 'rxjs/add/operator/filter';
 
-/** A hero's name can't match the given regular expression */
-export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } => {
-    const name = control.value;
-    const no = nameRe.test(name);
-    return no ? { 'forbiddenName': { name } } : null;
-  };
-}
+
 
 //reactive form ou model driven form
 @Component({
@@ -32,7 +25,7 @@ export class EditRfItemComponent implements OnInit, OnChanges {
 
     this.editRfForm = new FormGroup({
       name: this.nameFc,
-      codename: new FormControl('', [Validators.required, Validators.minLength(3), forbiddenNameValidator(/JA/i)])
+      codename: new FormControl('', [Validators.required, Validators.minLength(3), this.forbiddenNameValidator(/JA/i)])
     }, this.specialValidator);
 
   }
@@ -56,6 +49,15 @@ export class EditRfItemComponent implements OnInit, OnChanges {
   specialValidator(g: FormGroup) {
     let valid = g.get('name').value != '' && g.get('name').value === g.get('codename').value ? { 'identiques': true } : null;
     return valid;
+  }
+
+  /** A hero's name can't match the given regular expression */
+  forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      const name = control.value;
+      const no = nameRe.test(name);
+      return no ? { 'forbiddenName': { name } } : null;
+    };
   }
 
   ngOnChanges() {
