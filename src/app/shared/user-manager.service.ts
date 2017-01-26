@@ -21,6 +21,20 @@ export class UserManagerService {
       }).catch(res => console.warn(res));
   }
 
+  search(name: string, codename: string, idUser?: number): Promise<User> {
+    console.log("search");
+    let paramId = (idUser == null) ? '' : `&id_ne=${idUser}`
+    return this.http.get(`${API}?name=${name}&codename=${codename}${paramId}`)
+      .debounceTime(300) // wait for 300ms pause in events
+      .distinctUntilChanged()
+      .first()
+      .toPromise().then(res => {
+        let searchUser = res.json();
+        console.log(searchUser);
+        return searchUser;
+      });
+  }
+
   //juste modif
   save(idUser: number, majData: any): Promise<User> {
     //user existant    

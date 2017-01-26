@@ -8,7 +8,10 @@
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" placeholder="Saisie du nom" id="name" formControlName="name">
-        <div class="alert alert-danger" *ngIf="editRfForm.get('name').hasError('required') && editRfForm.get('name').touched">Obligatoire</div>
+        <div class="alert alert-danger" *ngIf="editRfForm.get('name').errors && editRfForm.get('name').touched">
+          <span *ngIf="editRfForm.get('name').hasError('required')">Obligatoire. </span>
+          <span *ngIf="editRfForm.get('name').hasError('usernameTaken') && !editRfForm.get('name').pending">Nom déjà pris. </span>
+        </div>
       </div>
       <div class="form-group">
         <label for="codename">Codename</label>
@@ -19,10 +22,12 @@
           <span *ngIf="editRfForm.get('codename').hasError('forbiddenName')">Nom interdit. </span>
         </div>
       </div>
+      <pre>{{editRfForm.get('name').errors | json}}</pre>
       <pre>{{editRfForm.get('codename').errors | json}}</pre>
       <pre>{{editRfForm.errors | json}}</pre>
       <pre>{{editRfForm.value | json}}</pre>
       <div class="alert alert-danger" *ngIf="editRfForm.hasError('identiques')">Name et code name doivent être différents</div>
+      <div class="alert alert-danger" *ngIf="editRfForm.hasError('usernameTakenServ')">Name et code name déjà pris</div>
       <!--<div class="alert alert-danger" [hidden]="editRfForm.validator.get('specialValidator').valid">Obligatoire</div>-->
       <button [disabled]="editRfForm.pristine" class="btn btn-default" (click)="onCancel()">Annuler</button>
       <button type="submit" [disabled]="!editRfForm.valid" class="btn btn-primary">Submit</button>

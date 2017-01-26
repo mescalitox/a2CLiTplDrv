@@ -1,8 +1,13 @@
+import { UsernameValidator } from './../shared/username-validator';
 import { UserManagerService } from './../shared/user-manager.service';
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 
-import 'rxjs/add/operator/filter';
+//import 'rxjs/add/operator/filter';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/first';
 
 
 
@@ -19,14 +24,14 @@ export class EditRfItemComponent implements OnInit, OnChanges {
 
   private editRfForm: FormGroup;
 
-  private nameFc = new FormControl("", Validators.required);
+  private nameFc = new FormControl("", Validators.required, this.usernameTakenObs);
 
   constructor(private fb: FormBuilder, private userManagerService: UserManagerService) {
 
     this.editRfForm = new FormGroup({
       name: this.nameFc,
       codename: new FormControl('', [Validators.required, Validators.minLength(3), this.forbiddenNameValidator(/JA/i)])
-    }, this.specialValidator);
+    }, this.specialValidator, (fg: FormGroup) => this.usernameTakenServ(fg)/*this.usernameTakenServ.bind(this)*/);
 
   }
 
@@ -59,6 +64,53 @@ export class EditRfItemComponent implements OnInit, OnChanges {
       return no ? { 'forbiddenName': { name } } : null;
     };
   }
+
+  /**assynchrone */
+  usernameTaken(control: AbstractControl): Promise<any> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === "David") {
+          resolve({ "usernameTaken": true })
+        } else {
+          resolve(null);
+        };
+
+      }, 1000);
+    });
+
+  }
+
+  usernameTakenObs(control: AbstractControl): Observable<any> {
+    return new Observable(observer => {
+      if (control.value === "David") {
+        observer.next({ "usernameTakenObs": true });
+      } else {
+        observer.next(null);
+      }
+    }).debounceTime(500).distinctUntilChanged().first()
+  }
+
+  /**assynchrone avec requete DB*/
+  usernameTakenServ(fg: FormGroup): Promise<any> {
+    if (fg.get('name').untouched && fg.get('codename').untouched) {
+      return new Promise((resolve, reject) => resolve(null));
+    } else {
+      let nameValue = fg.get('name').value;
+      let codenameValue = fg.get('codename').value;
+
+      console.warn("test" + nameValue + " " + codenameValue + " = " + (nameValue === codenameValue));
+      // console.warn(this.userManagerService);
+      // return new Promise((resolve, reject) => resolve(name === codename ? { 'identiques2': true } : null));
+      return this.userManagerService.search(nameValue, codenameValue, this.item.id).then(user => {
+        if (user != null && Array.isArray(user) && user.length > 0) {
+          return { "usernameTakenServ": true }
+        } else {
+          return null;
+        }
+      });
+    }
+  }
+
 
   ngOnChanges() {
     // todo ?

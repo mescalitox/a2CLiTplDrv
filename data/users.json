@@ -1,59 +1,74 @@
 {
-  "users": [{
-    "name": "Laurent",
-    "codename": "Tracker",
-    "id": 1
-  }, {
-    "name": "Nicolas",
-    "codename": "Nicolas",
-    "id": 2
-  }, {
-    "name": "Julien",
-    "codename": "Jaja",
-    "id": 3
-  }, {
-    "name": "Bilal",
-    "codename": "Bills",
-    "id": 4
-  }, {
-    "name": "Maxime",
-    "codename": "Max",
-    "id": 5
-  }, {
-    "id": 6,
-    "name": "Sylvie",
-    "codename": "Dids"
-  }, {
-    "id": 7,
-    "name": "Guillaume",
-    "codename": "Sabz"
-  }, {
-    "id": 8,
-    "name": "Joel",
-    "codename": "AJN"
-  }, {
-    "id": 9,
-    "name": "Fabrice",
-    "codename": "Fab"
-  }, {
-    "id": 10,
-    "name": "Gwenael",
-    "codename": "Gwen"
-  }, {
-    "name": "Johann",
-    "codename": "Jo",
-    "id": 11
-  }, {
-    "id": 12,
-    "name": "Renaud",
-    "codename": "freezeburger"
-  }, {
-    "id": 20,
-    "name": "Mohamed",
-    "codename": "Momo"
-  }, {
-    "name": "Test",
-    "codename": "test c",
-    "id": 21
-  }]
+  "users": [
+    {
+      "name": "Laurent",
+      "codename": "Davidd",
+      "id": 1
+    },
+    {
+      "name": "Nicolas",
+      "codename": "Nicolas",
+      "id": 2
+    },
+    {
+      "name": "Julien",
+      "codename": "Jaja",
+      "id": 3
+    },
+    {
+      "name": "Bilal",
+      "codename": "Bills",
+      "id": 4
+    },
+    {
+      "name": "Maxime",
+      "codename": "Max",
+      "id": 5
+    },
+    {
+      "id": 6,
+      "name": "Sylvie",
+      "codename": "Dids"
+    },
+    {
+      "id": 7,
+      "name": "Guillaume",
+      "codename": "Sabz"
+    },
+    {
+      "id": 8,
+      "name": "Joel",
+      "codename": "AJN"
+    },
+    {
+      "id": 9,
+      "name": "Fabrice",
+      "codename": "Fab"
+    },
+    {
+      "id": 10,
+      "name": "Gwenael",
+      "codename": "Gwen"
+    },
+    {
+      "name": "Johann",
+      "codename": "Jo",
+      "id": 11
+    },
+    {
+      "id": 12,
+      "name": "Renaud",
+      "codename": "freezeburger"
+    },
+    {
+      "id": 20,
+      "name": "Mohamed",
+      "codename": "Momo"
+    },
+    {
+      "name": "Test",
+      "codename": "test c",
+      "id": 21
+    }
+  ]
 }
